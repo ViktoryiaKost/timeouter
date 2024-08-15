@@ -1,0 +1,18 @@
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    font-family: Verdana, sans-serif;
+    vertical-align: middle;
+}
+
+.page-body {
+    width: 800px;
+    text-align: center;
+}

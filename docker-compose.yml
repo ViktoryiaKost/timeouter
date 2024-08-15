@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  php-apache:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        SHOPIFY_API_KEY: 'c3d40c0b9a4a548ef780a41046e0e577'
+    restart: always
+    volumes:
+      - ./web/:/app/
+    env_file:
+      - ./web/.env
+    container_name: php-apache
+
+  web:
+    image: nginx:latest
+    restart: always
+    ports:
+        - 80:80
+        - 443:443
+    volumes:
+        - ./web/:/app/
+        - ./volume/nginx/conf/:/etc/nginx/conf.d/:ro
+        - ./volume/certbot/www/:/var/www/certbot/:ro
+        - ./volume/certbot/conf/:/etc/nginx/ssl/:ro
+    depends_on:
+      - php-apache
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./volume/certbot/www/:/var/www/certbot/:rw
+      - ./volume/certbot/conf/:/etc/letsencrypt/:rw
