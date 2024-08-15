@@ -13,7 +13,7 @@ async function getProducts() {
             method: 'GET',
             headers: {
                 "Content-Type":"application/json",
-                "X-Shopify-Access-Token": "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"
+                "X-Shopify-Access-Token": ""
 
             }});
 
